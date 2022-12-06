@@ -9,7 +9,7 @@ and clear all of the items in a list.
  */
 
 const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:3000";
-
+console.log('url is', url)
 function App() {
 	const [list, setList] = useState([]);
 
