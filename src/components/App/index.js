@@ -9,78 +9,78 @@ and clear all of the items in a list.
  */
 
 const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:3000";
-console.log('url is', url)
+console.log("url is", url);
 function App() {
-	const [list, setList] = useState([]);
+  const [list, setList] = useState([]);
 
-	// Fetching shopping list data from shopping list API.
-	useEffect(() => {
-		async function getShoppingList() {
-			const response = await fetch(`${url}/items`);
-			const data = await response.json(response);
-			console.log(data);
-			setList(data.payload);
-		}
-		getShoppingList();
-	}, []);
+  // Fetching shopping list data from shopping list API.
+  useEffect(() => {
+    async function getShoppingList() {
+      const response = await fetch(`${url}/items`);
+      const data = await response.json(response);
+      console.log(data);
+      setList(data.payload);
+    }
+    getShoppingList();
+  }, []);
 
-	async function addToList(newListItem) {
-		//This function changes the state of the list by pushing the text from the input field in to the array.
-		const listItemWithoutId = {
-			item: newListItem,
-			completed: false,
-		};
-		console.log(listItemWithoutId);
+  async function addToList(newListItem) {
+    //This function changes the state of the list by pushing the text from the input field in to the array.
+    const listItemWithoutId = {
+      item: newListItem,
+      completed: false,
+    };
+    console.log(listItemWithoutId);
 
-		// body changed from {{listitem:listItemWithoutId}} to {listItemWithoutId} because listItemWithoutId as shown above is already an object.
-		const response = await fetch(`${url}/items`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(listItemWithoutId),
-		});
+    // body changed from {{listitem:listItemWithoutId}} to {listItemWithoutId} because listItemWithoutId as shown above is already an object.
+    const response = await fetch(`${url}/items`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(listItemWithoutId),
+    });
 
-		if (!response.ok) {
-			// Shouldn't really use alert, as it blocks, but will do for now.
-			return alert("Failed to add item, please try again later.");
-		}
+    if (!response.ok) {
+      // Shouldn't really use alert, as it blocks, but will do for now.
+      return alert("Failed to add item, please try again later.");
+    }
 
-		const data = await response.json();
-		console.log("data from fetch", data);
-		const listItemWithId = data.payload;
+    const data = await response.json();
+    console.log("data from fetch", data);
+    const listItemWithId = data.payload;
 
-		setList((previous) => [...previous, listItemWithId]);
-	}
+    setList((previous) => [...previous, listItemWithId]);
+  }
 
-	function clearList() {
-		//This function clears all the items that have been added to the list.
-		const clearedList = [];
-		setList(clearedList);
-	}
+  function clearList() {
+    //This function clears all the items that have been added to the list.
+    const clearedList = [];
+    setList(clearedList);
+  }
 
   async function tickItem(idOfTickedItem) {
-    console.log(list)
+    console.log(list);
     let strikeOption;
-    for (let i = 0; i < list.length; i++){
+    for (let i = 0; i < list.length; i++) {
       if (list[i].id === idOfTickedItem) {
         strikeOption = !list[i].completed;
       }
     }
-		const obj = { completed: strikeOption };
-		await fetch(`${url}/items/${idOfTickedItem}`, {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(obj),
-		});
-		setList((previous) => {
-			return previous.map((item) => {
-				return item.id !== idOfTickedItem
-					? item
-					: { ...item, completed: !item.completed };
-			});
-		});
-	}
+    const obj = { completed: strikeOption };
+    await fetch(`${url}/items/${idOfTickedItem}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj),
+    });
+    setList((previous) => {
+      return previous.map((item) => {
+        return item.id !== idOfTickedItem
+          ? item
+          : { ...item, completed: !item.completed };
+      });
+    });
+  }
 
-	return (
+  return (
     <section>
       <InputList addToList={addToList} buttonText={"Add To List"} />
       <ShowList list={list} tickItem={tickItem} />
