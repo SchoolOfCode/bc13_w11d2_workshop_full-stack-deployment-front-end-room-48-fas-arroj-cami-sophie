@@ -6,3 +6,7 @@ When deploying the front end:
 
 - Make sure you set the `REACT_APP_BACKEND_URL` environment variable in the deployment settings (because at build time, the build process will take the values available in the environment where the platform is running your code and inject/hard code them into the generated files, just like our .env does for us locally).
 - Have a look at the typical build settings (for a typical project folder structure): https://docs.netlify.com/configure-builds/common-configurations/#create-react-app
+
+Plan:
+- Have your API URL to provide as enviorment variable on your front end✅
+- Set REACT_APP_BACKEND_URL env variable in the deployment settings

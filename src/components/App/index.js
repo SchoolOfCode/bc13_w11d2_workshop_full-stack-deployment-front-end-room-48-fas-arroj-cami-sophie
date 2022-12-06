@@ -30,11 +30,13 @@ function App() {
       item: newListItem,
       completed: false,
     };
+    console.log(listItemWithoutId);
 
+    // body changed from {{listitem:listItemWithoutId}} to {listItemWithoutId} because listItemWithoutId as shown above is already an object.
     const response = await fetch(`${url}/items`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ listItem: listItemWithoutId }),
+      body: JSON.stringify(listItemWithoutId),
     });
 
     if (!response.ok) {
@@ -43,6 +45,7 @@ function App() {
     }
 
     const data = await response.json();
+    console.log("data from fetch", data);
     const listItemWithId = data.payload;
 
     setList((previous) => [...previous, listItemWithId]);
