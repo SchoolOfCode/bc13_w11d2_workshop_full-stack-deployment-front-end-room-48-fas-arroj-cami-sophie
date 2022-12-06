@@ -57,9 +57,16 @@ function App() {
 		setList(clearedList);
 	}
 
-	async function tickItem(idOfTickedItem) {
-		const obj = { completed: true };
-		const response = await fetch(`${url}/items/${idOfTickedItem}`, {
+  async function tickItem(idOfTickedItem) {
+    console.log(list)
+    let strikeOption;
+    for (let i = 0; i < list.length; i++){
+      if (list[i].id === idOfTickedItem) {
+        strikeOption = !list[i].completed;
+      }
+    }
+		const obj = { completed: strikeOption };
+		await fetch(`${url}/items/${idOfTickedItem}`, {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(obj),
@@ -71,8 +78,6 @@ function App() {
 					: { ...item, completed: !item.completed };
 			});
 		});
-		const data = await response.json();
-		console.log(data);
 	}
 
 	return (
