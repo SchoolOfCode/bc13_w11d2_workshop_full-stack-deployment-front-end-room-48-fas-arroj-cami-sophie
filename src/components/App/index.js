@@ -81,12 +81,24 @@ function App() {
 	}
 
 	return (
-		<section>
-			<InputList addToList={addToList} buttonText={"Add To List"} />
-			<ShowList list={list} tickItem={tickItem} />
-			<ClearList clearList={clearList} buttonText={"Clear List"} />
-		</section>
-	);
+    <section>
+      <InputList addToList={addToList} buttonText={"Add To List"} />
+      <ShowList list={list} tickItem={tickItem} />
+      <ClearList clearList={clearList} buttonText={"Clear List"} />
+      <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+      </div>
+    </section>
+  );
 }
 
 export default App;

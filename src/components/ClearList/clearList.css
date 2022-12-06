@@ -1,23 +1,57 @@
+
+/* CSS */
 .ClearList {
-  box-shadow: inset 1px 1px 0px 0px #f29c93;
-  background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-  background-color: #fe1a00;
-  border-radius: 14px;
-  display: inline-block;
+  align-items: center;
+  background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+  border: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #fff;
   cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 28px;
-  font-weight: bold;
-  padding: 32px 76px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Codec cold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  height: 54px;
+  justify-content: center;
+  letter-spacing: .4px;
+  line-height: 1;
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
   text-decoration: none;
-  text-shadow: 0px 1px 0px #b23e35;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
-.ClearList:hover {
-  background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
-  background-color: #ce0100;
-}
+
 .ClearList:active {
-  position: relative;
-  top: 1px;
+  outline: 0;
+}
+
+.ClearList:hover {
+  outline: 0;
+}
+
+.ClearList span {
+  transition: all 200ms;
+}
+
+.ClearList:hover span {
+  transform: scale(.9);
+  opacity: .75;
+}
+
+@media screen and (max-width: 991px) {
+  .ClearList {
+    font-size: 15px;
+    height: 50px;
+  }
+
+  .ClearList span {
+    line-height: 50px;
+  }
 }
